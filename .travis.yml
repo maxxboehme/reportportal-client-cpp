@@ -94,10 +94,10 @@ matrix:
         env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7
 
       - <<: *linux_conan
-        env: CONAN_CLANG_VERSIONS=8.0 CONAN_DOCKER_IMAGE=conanio/clang8
+        env: CONAN_CLANG_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/clang8
 
       - <<: *linux_conan
-        env: CONAN_CLANG_VERSIONS=9.0 CONAN_DOCKER_IMAGE=conanio/clang9
+        env: CONAN_CLANG_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/clang9
 
 #      - <<: *osx_conan
 #        osx_image: xcode10
