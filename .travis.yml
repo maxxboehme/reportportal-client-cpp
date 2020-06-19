@@ -25,6 +25,7 @@ conan_script: &conan_script
 linux_cmake: &linux_cmake
    os: linux
    dist: xenial
+   language: python
    python: "3.7"
    addons:
        apt:
@@ -48,8 +49,8 @@ linux_conan: &linux_conan
    python: "3.7"
    services:
      - docker
-   before_script: *cmake_before_script
-   script: *cmake_script
+   install: *conan_install
+   script: *conan_script
 
 osx_conan: &osx_conan
    os: osx
