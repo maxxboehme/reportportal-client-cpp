@@ -5,26 +5,27 @@ env:
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
      - CONAN_UPLOAD_ONLY_WHEN_STABLE: 1 # Will only upload when the branch matches CONAN_STABLE_BRANCH_PATTERN
 
-before_script: &cmake_before_script
+cmake_before_script: &cmake_before_script
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE${BUILD_TYPE}
+  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
 
-script: &cmake_script
+cmake_script: &cmake_script
   - cmake --build .
   - ctest --output-on-failure
 
-install: &conan_install
+conan_install: &conan_install
   - chmod +x conan/.travis/install.sh
   - ./conan/.travis/install.sh
 
-script: &conan_script
+conan_script: &conan_script
   - chmod +x conan/.travis/run.sh
   - ./conan/.travis/run.sh
 
-linux: &linux_cmake
+linux_cmake: &linux_cmake
    os: linux
    dist: xenial
+   python: "3.7"
    addons:
        apt:
            sources:
@@ -40,7 +41,7 @@ linux: &linux_cmake
    before_script: *cmake_before_script
    script: *cmake_script
 
-linux: &linux_conan
+linux_conan: &linux_conan
    os: linux
    dist: xenial
    language: python
@@ -50,7 +51,7 @@ linux: &linux_conan
    before_script: *cmake_before_script
    script: *cmake_script
 
-osx: &osx_conan
+osx_conan: &osx_conan
    os: osx
    language: generic
    install: *conan_install
