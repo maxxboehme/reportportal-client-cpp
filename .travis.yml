@@ -63,17 +63,19 @@ matrix:
    include:
 
       # Validate that project can be made just using cmake process
-      - <<: *linux_cmake
-        env:
-            - CC='gcc-6'
-            - CXX='g++-6'
-            - BUILD_TYPE='Release'
-
-      - <<: *linux_cmake
-        env:
-            - CC='gcc-6'
-            - CXX='g++-6'
-            - BUILD_TYPE='Debug'
+# [TODO] Disabled cmake builds until figuring out if can use a lower level
+# or install newer cmake
+#      - <<: *linux_cmake
+#        env:
+#            - CC='gcc-6'
+#            - CXX='g++-6'
+#            - BUILD_TYPE='Release'
+#
+#      - <<: *linux_cmake
+#        env:
+#            - CC='gcc-6'
+#            - CXX='g++-6'
+#            - BUILD_TYPE='Debug'
 
       # Create conan packages for multiple compilers
       - <<: *linux_conan
