@@ -52,7 +52,7 @@ TEST_CASE("Rapidjson deserialize api token responce", "[rapidjson][serializer]")
     REQUIRE(deserialized_responce.access_token() == api_token);
 }
 
-TEST_CASE("Rapidjson serializer begin launch with optionals", "[rapidjson][serializer]")
+TEST_CASE("Rapidjson serializer begin launch with optionals", "[!hide][rapidjson][serializer]")
 {
     report_portal::rapidjson_serializer serializer;
 
@@ -114,7 +114,7 @@ TEST_CASE("Rapidjson deserialize begin launch responce", "[rapidjson][serializer
     }
 }
 
-TEST_CASE("Rapidjson serializer end launch with optionals", "[rapidjson][serializer]")
+TEST_CASE("Rapidjson serializer end launch with optionals", "[!hide][rapidjson][serializer]")
 {
     report_portal::rapidjson_serializer serializer;
 
@@ -174,7 +174,7 @@ TEST_CASE("Rapidjson deserialize end launch responce", "[rapidjson][serializer]"
     }
 }
 
-TEST_CASE("Rapidjson serializer begin test item with optionals", "[rapidjson][serializer]")
+TEST_CASE("Rapidjson serializer begin test item with optionals", "[!hide][rapidjson][serializer]")
 {
     report_portal::rapidjson_serializer serializer;
 
@@ -224,7 +224,7 @@ TEST_CASE("Rapidjson deserialize begin test item responce", "[rapidjson][seriali
     }
 }
 
-TEST_CASE("Rapidjson serializer end test item with optionals", "[rapidjson][serializer]")
+TEST_CASE("Rapidjson serializer end test item with optionals", "[!hide][rapidjson][serializer]")
 {
     report_portal::rapidjson_serializer serializer;
 
@@ -264,7 +264,7 @@ TEST_CASE("Rapidjson deserialize end test item responce", "[rapidjson][serialize
     }
 }
 
-TEST_CASE("Rapidjson serializer batch of logs", "[rapidjson][serializer]")
+TEST_CASE("Rapidjson serializer batch of logs", "[!hide][rapidjson][serializer]")
 {
     report_portal::rapidjson_serializer serializer;
 
