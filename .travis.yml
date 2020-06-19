@@ -8,7 +8,7 @@ env:
 cmake_before_script: &cmake_before_script
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
 
 cmake_script: &cmake_script
   - cmake --build .
@@ -62,6 +62,7 @@ matrix:
    fast_finish: true
    include:
 
+      # Validate that project can be made just using cmake process
       - <<: *linux_cmake
         env:
             - CC='gcc-6'
@@ -74,9 +75,7 @@ matrix:
             - CXX='g++-6'
             - BUILD_TYPE='Debug'
 
-      - <<: *linux_conan
-        env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=conanio/gcc6
-
+      # Create conan packages for multiple compilers
       - <<: *linux_conan
         env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=conanio/gcc7
 
@@ -95,7 +94,7 @@ matrix:
       - <<: *linux_conan
         env: CONAN_CLANG_VERSIONS=7.1 CONAN_DOCKER_IMAGE=conanio/clang71
 
-      - <<: *osx_conan
-        osx_image: xcode10
-        env: CONAN_APPLE_CLANG_VERSIONS=10.0
+#      - <<: *osx_conan
+#        osx_image: xcode10
+#        env: CONAN_APPLE_CLANG_VERSIONS=10.0
 

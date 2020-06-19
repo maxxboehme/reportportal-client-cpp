@@ -22,4 +22,5 @@ class ReportportalclientcppTestConan(ConanFile):
     def test(self):
         if not tools.cross_building(self.settings):
             cmake = CMake(self)
-            cmake.test()
+            # [TODO]: look into why parallel causes issues
+            cmake.test(parallel=False)
