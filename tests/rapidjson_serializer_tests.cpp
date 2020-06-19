@@ -24,7 +24,7 @@ TEST_CASE("Rapidjson deserialize ui token responce", "[rapidjson][serializer]")
         "\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzU5MDA0NDgsInVzZXJfbmFtZSI6ImRlZmF1bHQiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiOGQxZmUxOGUtNWY4NC00YTcwLWEwMTctNDBmZTU4ZmY3MjU3IiwiY2xpZW50X2lkIjoidWkiLCJzY29wZSI6WyJ1aSJdfQ.-5INLZnYJhNLwU5BTBuEDd0SBPoRGLBX6uX03kaEwLs\","
         "\"token_type\":\"bearer\","
         "\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJkZWZhdWx0Iiwic2NvcGUiOlsidWkiXSwiYXRpIjoiOGQxZmUxOGUtNWY4NC00YTcwLWEwMTctNDBmZTU4ZmY3MjU3IiwiZXhwIjoxNTc4NDg4ODQ4LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMGQyZDdiNTEtNGE3Mi00NjEwLTgxYmUtY2JmYjZhODhjNTgxIiwiY2xpZW50X2lkIjoidWkifQ.YOcpWlQSgF3LuskIqXgasjKvawbM_XP_I2oNJcgt9mM\","
-        "\"expires_in\":\"3600\","
+        "\"expires_in\":3600,"
         "\"scope\":\"ui\","
         "\"jti\":\"8d1fe18e-5f84-4a70-a017-40fe58ff7257\""
         "}";
