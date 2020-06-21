@@ -5,7 +5,6 @@ environment:
 
     CONAN_REFERENCE: "reportportal-client-cpp/0.1"
     CONAN_USERNAME: "maxxboehme"
-    CONAN_CHANNEL: "channel"
     CONAN_CHANNEL: "testing"
     CONAN_STABLE_BRANCH_PATTERN: "release/*"
     CONAN_UPLOAD_ONLY_WHEN_STABLE: 1 # Will only upload when the branch matches CONAN_STABLE_BRANCH_PATTERN
