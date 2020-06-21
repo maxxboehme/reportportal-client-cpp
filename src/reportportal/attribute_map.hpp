@@ -36,7 +36,7 @@ class attribute_map final
         }
 
         void remove_tag(const std::string& tag) {
-            std::remove(std::begin(_tags), std::end(_tags), tag);
+            _tags.erase(std::remove(std::begin(_tags), std::end(_tags), tag));
         }
 
         bool empty() {

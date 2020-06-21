@@ -1,5 +1,6 @@
 #include <reportportal/service.hpp>
 #include <reportportal/rapidjson_serializer.hpp>
+#include <algorithm>
 #include <string>
 #include <cstring>
 #include <uuid.h>
@@ -40,7 +41,7 @@ static size_t read_function(char *buffer, size_t size, size_t nitems, void* user
     return amount_copied;
 }
 
-static bool is_valid_time(const std::chrono::high_resolution_clock::time_point& time_point)
+static bool is_valid_time(const std::chrono::system_clock::time_point& time_point)
 {
     return time_point.time_since_epoch().count() > 0;
 }
@@ -63,7 +64,7 @@ service::service(const std::string& endpoint, const std::string& project, const 
 
 begin_launch_responce service::begin_launch(
     const std::string& name,
-    const std::chrono::high_resolution_clock::time_point& start_time,
+    const std::chrono::system_clock::time_point& start_time,
     std::optional<std::string> description,
     std::optional<uuids::uuid> uuid,
     std::optional<attribute_map> attributes,
@@ -91,7 +92,7 @@ begin_launch_responce service::begin_launch(
 
 end_launch_responce service::end_launch(
     const uuids::uuid& uuid,
-    const std::chrono::high_resolution_clock::time_point& end_time)
+    const std::chrono::system_clock::time_point& end_time)
 {
     if (!is_valid_time(end_time)) {
         throw std::invalid_argument("end_time is not valid");
@@ -107,7 +108,7 @@ end_launch_responce service::end_launch(
 
 begin_test_item_responce service::begin_test_item(
     const std::string& name,
-    const std::chrono::high_resolution_clock::time_point& start_time,
+    const std::chrono::system_clock::time_point& start_time,
     test_item_type type,
     const uuids::uuid& launch_uuid,
     std::optional<uuids::uuid> parent_uuid,
@@ -148,7 +149,7 @@ begin_test_item_responce service::begin_test_item(
 end_test_item_responce service::end_test_item(
     const uuids::uuid& uuid,
     const uuids::uuid& launch_uuid,
-    const std::chrono::high_resolution_clock::time_point end_time,
+    const std::chrono::system_clock::time_point end_time,
     std::optional<test_item_status> status,
     std::optional<issue> issue)
 {

@@ -26,7 +26,7 @@ class iservice
          */
         virtual begin_launch_responce begin_launch(
             const std::string& name,
-            const std::chrono::high_resolution_clock::time_point& start_time,
+            const std::chrono::system_clock::time_point& start_time,
             std::optional<std::string> description,
             std::optional<uuids::uuid> uuid,
             std::optional<attribute_map> attributes,
@@ -36,7 +36,7 @@ class iservice
 
         virtual end_launch_responce end_launch(
             const uuids::uuid& uuid,
-            const std::chrono::high_resolution_clock::time_point& endTime) = 0;
+            const std::chrono::system_clock::time_point& endTime) = 0;
 
         /**
          *
@@ -56,7 +56,7 @@ class iservice
          */
         virtual begin_test_item_responce begin_test_item(
             const std::string& name,
-            const std::chrono::high_resolution_clock::time_point& start_time,
+            const std::chrono::system_clock::time_point& start_time,
             test_item_type type,
             const uuids::uuid& launch_uuid,
             std::optional<uuids::uuid> parent_uuid,
@@ -77,7 +77,7 @@ class iservice
         virtual end_test_item_responce end_test_item(
             const uuids::uuid& uuid,
             const uuids::uuid& launch_uuid,
-            const std::chrono::high_resolution_clock::time_point end_time,
+            const std::chrono::system_clock::time_point end_time,
             std::optional<test_item_status> status,
             std::optional<issue> issue) = 0;
 

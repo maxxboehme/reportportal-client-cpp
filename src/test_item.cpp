@@ -199,7 +199,7 @@ bool test_item::has_ended() const {
     return _has_ended;
 }
 
-void test_item::start(const std::chrono::high_resolution_clock::time_point& start_time) {
+void test_item::start(const std::chrono::system_clock::time_point& start_time) {
     if (!_parent.has_started()) {
         throw std::runtime_error("parent has not started yet");
     } else if (_parent.has_ended()) {
@@ -240,7 +240,7 @@ void test_item::set_status(test_item_status status) {
     _status = status;
 }
 
-void test_item::end(const std::chrono::high_resolution_clock::time_point& end_time) {
+void test_item::end(const std::chrono::system_clock::time_point& end_time) {
     if (_has_ended) {
         throw std::runtime_error("test_item has already ended");
     } else if (!_has_started) {
@@ -256,7 +256,7 @@ void test_item::end(const std::chrono::high_resolution_clock::time_point& end_ti
         std::nullopt);
 }
 
-void test_item::end(const std::chrono::high_resolution_clock::time_point& end_time, test_item_status status) {
+void test_item::end(const std::chrono::system_clock::time_point& end_time, test_item_status status) {
     if (_has_ended) {
         throw std::runtime_error("test_item has already ended");
     } else if (!_has_started) {
@@ -276,7 +276,7 @@ void test_item::end(const std::chrono::high_resolution_clock::time_point& end_ti
         std::nullopt);
 }
 
-void test_item::log(const std::chrono::high_resolution_clock::time_point& time, log_level level, const std::string& message) {
+void test_item::log(const std::chrono::system_clock::time_point& time, log_level level, const std::string& message) {
     if (!_has_started) {
         throw std::runtime_error("test_item has not been started yet before end");
     }
@@ -284,7 +284,7 @@ void test_item::log(const std::chrono::high_resolution_clock::time_point& time, 
     _batched_logs.emplace_back(_parent.launch_id(), _id, time, level, message);
 }
 
-void test_item::log(const std::chrono::high_resolution_clock::time_point& time, log_level level, const std::string& message, const attachment& attachment) {
+void test_item::log(const std::chrono::system_clock::time_point& time, log_level level, const std::string& message, const attachment& attachment) {
     if (!_has_started) {
         throw std::runtime_error("test_item has not been started yet before end");
     }

@@ -201,7 +201,7 @@ class ijson_serializer
     public:
     virtual std::string serialize_begin_launch(
         const std::string& name,
-        const std::chrono::high_resolution_clock::time_point& start_time,
+        const std::chrono::system_clock::time_point& start_time,
         std::optional<std::string> description,
         std::optional<uuids::uuid> uuid,
         std::optional<attribute_map> attributes,
@@ -212,13 +212,13 @@ class ijson_serializer
     virtual begin_launch_responce deserialize_begin_launch_responce(const std::string& responce) = 0;
 
     virtual std::string serialize_end_launch(
-        const std::chrono::high_resolution_clock::time_point& end_time) = 0;
+        const std::chrono::system_clock::time_point& end_time) = 0;
 
     virtual end_launch_responce deserialize_end_launch_responce(const std::string& responce) = 0;
 
     virtual std::string serialize_begin_test_item(
         const std::string& name,
-        const std::chrono::high_resolution_clock::time_point& start_time,
+        const std::chrono::system_clock::time_point& start_time,
         test_item_type type,
         const uuids::uuid& launch_uuid,
         std::optional<std::string> description,
@@ -232,7 +232,7 @@ class ijson_serializer
     virtual begin_test_item_responce deserialize_begin_test_item_responce(const std::string& responce) = 0;
 
     virtual std::string serialize_end_test_item(
-        const std::chrono::high_resolution_clock::time_point& end_time,
+        const std::chrono::system_clock::time_point& end_time,
         const uuids::uuid& launch_uuid,
         std::optional<bool> retry,
         std::optional<test_item_status> status,

@@ -48,3 +48,7 @@ target_link_libraries(reportportal-client-cpp
         RapidJSON::RapidJSON
         CURL::CURL)
 target_compile_features(reportportal-client-cpp PUBLIC cxx_std_17)
+# Needed on Windows platforms as WinDef.h has macros for min/max that interfere with std::min/max
+target_compile_definitions(reportportal-client-cpp
+    PRIVATE
+      NOMINMAX)

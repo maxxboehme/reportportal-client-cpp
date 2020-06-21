@@ -146,7 +146,7 @@ bool launch::has_ended() const {
     return _has_ended;
 }
 
-void launch::start(const std::chrono::high_resolution_clock::time_point& start_time) {
+void launch::start(const std::chrono::system_clock::time_point& start_time) {
     if (_has_ended) {
         throw std::runtime_error("Launch has already ended");
     } else if (_has_started) {
@@ -172,7 +172,7 @@ void launch::start(const std::chrono::high_resolution_clock::time_point& start_t
     // _number = responce.number();
 }
 
-void launch::end(const std::chrono::high_resolution_clock::time_point& end_time) {
+void launch::end(const std::chrono::system_clock::time_point& end_time) {
     if (_has_ended) {
         throw std::runtime_error("Launch has already ended");
     } else if (!_has_started) {

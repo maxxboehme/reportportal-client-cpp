@@ -1,9 +1,9 @@
 #include <utils.h>
 
 
-static std::string to_iso_8601(const std::chrono::high_resolution_clock::time_point& time)
+static std::string to_iso_8601(const std::chrono::system_clock::time_point& time)
 {
-    std::time_t epoch_seconds = std::chrono::high_resolution_clock::to_time_t(time);
+    std::time_t epoch_seconds = std::chrono::system_clock::to_time_t(time);
 
     // Format this as date time to seconds resolution.
     // e.g. 2016-08-30T08:18:51
@@ -13,7 +13,7 @@ static std::string to_iso_8601(const std::chrono::high_resolution_clock::time_po
 
     // If new now convert back to a time_point we will get the time truncated
     // to while seconds
-    auto truncated = std::chrono::high_resolution_clock::from_time_t(epoch_seconds);
+    auto truncated = std::chrono::system_clock::from_time_t(epoch_seconds);
 
     // Now we wubtract this seconds count from the original time to
     // get the number of extra microseconds...
@@ -26,7 +26,7 @@ static std::string to_iso_8601(const std::chrono::high_resolution_clock::time_po
     return stream.str();
 }
 
-std::chrono::high_resolution_clock::time_point from_iso_8601(const std::string& time)
+std::chrono::system_clock::time_point from_iso_8601(const std::string& time)
 {
     std::stringstream stream(time);
 
@@ -34,7 +34,7 @@ std::chrono::high_resolution_clock::time_point from_iso_8601(const std::string& 
     std::time_t t = std::time(nullptr);
     std::tm local_tm = *std::localtime(&t);
     stream >> std::get_time(&local_tm, "%Y-%m-%dT%H:%M:%S");
-    return std::chrono::high_resolution_clock::from_time_t(std::mktime(&local_tm));
+    return std::chrono::system_clock::from_time_t(std::mktime(&local_tm));
 }
 
 namespace std {
@@ -146,7 +146,7 @@ std::ostream& operator<<(std::ostream& output, const std::optional<report_portal
     return output;
 }
 
-std::ostream& operator<<(std::ostream& output, const std::chrono::high_resolution_clock::time_point& value) {
+std::ostream& operator<<(std::ostream& output, const std::chrono::system_clock::time_point& value) {
     output << to_iso_8601(value);
     return output;
 }

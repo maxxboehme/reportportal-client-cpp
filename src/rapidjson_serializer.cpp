@@ -82,9 +82,9 @@ std::string to_string(const std::tm& tm)
     return stream.str();
 }
 
-static std::string to_iso_8601(const std::chrono::high_resolution_clock::time_point& time)
+static std::string to_iso_8601(const std::chrono::system_clock::time_point& time)
 {
-    std::time_t epoch_seconds = std::chrono::high_resolution_clock::to_time_t(time);
+    std::time_t epoch_seconds = std::chrono::system_clock::to_time_t(time);
 
     // Format this as date time to seconds resolution.
     // e.g. 2016-08-30T08:18:51
@@ -94,7 +94,7 @@ static std::string to_iso_8601(const std::chrono::high_resolution_clock::time_po
 
     // If new now convert back to a time_point we will get the time truncated
     // to while seconds
-    auto truncated = std::chrono::high_resolution_clock::from_time_t(epoch_seconds);
+    auto truncated = std::chrono::system_clock::from_time_t(epoch_seconds);
 
     // Now we wubtract this seconds count from the original time to
     // get the number of extra microseconds...
@@ -107,7 +107,7 @@ static std::string to_iso_8601(const std::chrono::high_resolution_clock::time_po
     return stream.str();
 }
 
-static void add_required(rapidjson::Document& doc, const std::string& member, const std::chrono::high_resolution_clock::time_point& value)
+static void add_required(rapidjson::Document& doc, const std::string& member, const std::chrono::system_clock::time_point& value)
 {
     const std::string iso_8601_string = to_iso_8601(value);
     doc.AddMember(
@@ -264,7 +264,7 @@ static void throw_if_error(const rapidjson::Document& doc) {
 
 std::string rapidjson_serializer::serialize_begin_launch(
     const std::string& name,
-    const std::chrono::high_resolution_clock::time_point& start_time,
+    const std::chrono::system_clock::time_point& start_time,
     std::optional<std::string> description,
     std::optional<uuids::uuid> uuid,
     std::optional<attribute_map> attributes,
@@ -308,7 +308,7 @@ begin_launch_responce rapidjson_serializer::deserialize_begin_launch_responce(co
 }
 
 std::string rapidjson_serializer::serialize_end_launch(
-    const std::chrono::high_resolution_clock::time_point& end_time)
+    const std::chrono::system_clock::time_point& end_time)
 {
     rapidjson::Document doc;
     doc.SetObject();
@@ -346,7 +346,7 @@ end_launch_responce rapidjson_serializer::deserialize_end_launch_responce(const 
 
 std::string rapidjson_serializer::serialize_begin_test_item(
     const std::string& name,
-    const std::chrono::high_resolution_clock::time_point& start_time,
+    const std::chrono::system_clock::time_point& start_time,
     test_item_type type,
     const uuids::uuid& launch_uuid,
     std::optional<std::string> description,
@@ -388,7 +388,7 @@ begin_test_item_responce rapidjson_serializer::deserialize_begin_test_item_respo
 }
 
 std::string rapidjson_serializer::serialize_end_test_item(
-    const std::chrono::high_resolution_clock::time_point& end_time,
+    const std::chrono::system_clock::time_point& end_time,
     const uuids::uuid& launch_uuid,
     std::optional<bool> retry,
     std::optional<test_item_status> status,

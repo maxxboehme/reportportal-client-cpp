@@ -38,7 +38,7 @@ TEST_CASE("Launch start", "[launch]")
             _))
         .Return(report_portal::begin_launch_responce(generated_launch_id));
 
-    const std::chrono::high_resolution_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
     launch.start(start_time);
 
     REQUIRE(launch.id() == generated_launch_id);
@@ -95,7 +95,7 @@ TEST_CASE("Launch end before starting", "[launch]")
         service_mock.get(),
         "Test Launch");
 
-    const std::chrono::high_resolution_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
     REQUIRE_THROWS_AS(launch.end(end_time), std::runtime_error);
 }
 
@@ -118,7 +118,7 @@ TEST_CASE("Launch end after starting", "[launch]")
             _,
             _))
         .Return(report_portal::begin_launch_responce(generated_launch_id));
-    const std::chrono::high_resolution_clock::time_point start_time = from_iso_8601("2020-05-09T22:20:58-0500");
+    const std::chrono::system_clock::time_point start_time = from_iso_8601("2020-05-09T22:20:58-0500");
     launch.start(start_time);
 
     When(Method(service_mock, end_launch)
@@ -126,7 +126,7 @@ TEST_CASE("Launch end after starting", "[launch]")
             _,
             _))
         .Return(report_portal::end_launch_responce(generated_launch_id));
-    const std::chrono::high_resolution_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
     REQUIRE_NOTHROW(launch.end(end_time));
 
     SECTION("try to end again") {

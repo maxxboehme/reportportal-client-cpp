@@ -90,9 +90,9 @@ class launch final : public itest_item_parent
 
         bool has_ended() const;
 
-        void start(const std::chrono::high_resolution_clock::time_point& start_time);
+        void start(const std::chrono::system_clock::time_point& start_time);
 
-        void end(const std::chrono::high_resolution_clock::time_point& end_time);
+        void end(const std::chrono::system_clock::time_point& end_time);
 
     private:
         iservice& _service;

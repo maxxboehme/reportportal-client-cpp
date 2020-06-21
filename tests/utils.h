@@ -9,7 +9,7 @@
 #include <uuid.h>
 #include <reportportal/ijson_serializer.hpp>
 
-std::chrono::high_resolution_clock::time_point from_iso_8601(const std::string& time);
+std::chrono::system_clock::time_point from_iso_8601(const std::string& time);
 
 namespace std {
 std::ostream& operator<<(std::ostream& output, const std::optional<uuids::uuid>& value);

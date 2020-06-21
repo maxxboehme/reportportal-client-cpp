@@ -45,10 +45,12 @@ target_link_libraries(reportportal-client-cpp_tests PRIVATE catch_main Catch2::C
 target_include_directories(reportportal-client-cpp_tests
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 # FakeIt does not support optimizations -O2 or -O3
+if (NOT MSVC)
 target_compile_options(reportportal-client-cpp_tests
     BEFORE
     PRIVATE
         -O0)
+endif()
 
 # automatically discover tests that are defined in catch based test files you
 # can modify the unittests. TEST_PREFIX to whatever you want, or use different

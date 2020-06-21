@@ -99,7 +99,11 @@ matrix:
       - <<: *linux_conan
         env: CONAN_CLANG_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/clang9
 
-#      - <<: *osx_conan
-#        osx_image: xcode10
-#        env: CONAN_APPLE_CLANG_VERSIONS=10.0
+      - <<: *osx_conan
+        osx_image: xcode10
+        env: CONAN_APPLE_CLANG_VERSIONS=10.0
+
+      - <<: *osx_conan
+        osx_image: xcode11
+        env: CONAN_APPLE_CLANG_VERSIONS=10.0
 

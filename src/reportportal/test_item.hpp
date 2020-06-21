@@ -64,12 +64,12 @@ class test_item final : public itest_item_parent
         void set_has_stats(bool has_stats);
         bool has_started() const override;
         bool has_ended() const override;
-        void start(const std::chrono::high_resolution_clock::time_point& start_time);
+        void start(const std::chrono::system_clock::time_point& start_time);
         void set_status(test_item_status status);
-        void end(const std::chrono::high_resolution_clock::time_point& end_time);
-        void end(const std::chrono::high_resolution_clock::time_point& end_time, test_item_status status);
-        void log(const std::chrono::high_resolution_clock::time_point& time, log_level level, const std::string& message);
-        void log(const std::chrono::high_resolution_clock::time_point& time, log_level level, const std::string& message, const attachment& attachment);
+        void end(const std::chrono::system_clock::time_point& end_time);
+        void end(const std::chrono::system_clock::time_point& end_time, test_item_status status);
+        void log(const std::chrono::system_clock::time_point& time, log_level level, const std::string& message);
+        void log(const std::chrono::system_clock::time_point& time, log_level level, const std::string& message, const attachment& attachment);
         void flush_logs();
 
     private:

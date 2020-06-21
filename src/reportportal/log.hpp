@@ -50,14 +50,14 @@ class log final
     public:
         log(
             const uuids::uuid& launch_id,
-            const std::chrono::high_resolution_clock::time_point& time,
+            const std::chrono::system_clock::time_point& time,
             log_level level,
             const std::string& message);
 
         log(
             const uuids::uuid& launch_id,
             const uuids::uuid& test_item_id,
-            const std::chrono::high_resolution_clock::time_point& time,
+            const std::chrono::system_clock::time_point& time,
             log_level level,
             const std::string& message);
 
@@ -65,7 +65,7 @@ class log final
 
         uuids::uuid test_item_id() const;
 
-        std::chrono::high_resolution_clock::time_point time() const;
+        std::chrono::system_clock::time_point time() const;
 
         std::string message() const;
 
@@ -78,7 +78,7 @@ class log final
     private:
         uuids::uuid _launch_id;
         uuids::uuid _test_item_id;
-        std::chrono::high_resolution_clock::time_point _time;
+        std::chrono::system_clock::time_point _time;
         std::string _message;
         log_level _level;
 

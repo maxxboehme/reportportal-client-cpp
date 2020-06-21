@@ -38,7 +38,7 @@ TEST_CASE("Test_item simple construction", "[test_item]")
 //     report_portal::test_item suite(launch, "Test Suite");
 // 
 //     SECTION("try to start before parent") {
-//         const std::chrono::high_resolution_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
+//         const std::chrono::system_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
 //         REQUIRE_THROWS_AS(suite.start(start_time), std::runtime_error);
 //     }
 // 
@@ -56,7 +56,7 @@ TEST_CASE("Test_item simple construction", "[test_item]")
 //                _))
 //            .Return(report_portal::begin_launch_responce(generated_launch_id));
 // 
-//        const std::chrono::high_resolution_clock::time_point launch_start_time = from_iso_8601("2020-05-09T22:30:58-0500");
+//        const std::chrono::system_clock::time_point launch_start_time = from_iso_8601("2020-05-09T22:30:58-0500");
 //        launch.start(launch_start_time);
 // 
 //        CHECK(launch.id() == generated_launch_id);
@@ -78,7 +78,7 @@ TEST_CASE("Test_item simple construction", "[test_item]")
 //                _))
 //            .Return(report_portal::begin_test_item_responce(generated_test_item_id));
 // 
-//        const std::chrono::high_resolution_clock::time_point suite_start_time = from_iso_8601("2020-05-09T22:35:58-0500");
+//        const std::chrono::system_clock::time_point suite_start_time = from_iso_8601("2020-05-09T22:35:58-0500");
 //        suite.start(suite_start_time);
 // 
 //        REQUIRE(suite.id() == generated_test_item_id);
@@ -125,7 +125,7 @@ TEST_CASE("Test_item end", "[test_item]")
     report_portal::test_item suite(launch, "Test Suite");
 
     SECTION("try to end before start") {
-        const std::chrono::high_resolution_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
+        const std::chrono::system_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
         REQUIRE_THROWS_AS(suite.end(end_time), std::runtime_error);
     }
 
@@ -143,7 +143,7 @@ TEST_CASE("Test_item end", "[test_item]")
                 _))
             .Return(report_portal::begin_launch_responce(generated_launch_id));
 
-        const std::chrono::high_resolution_clock::time_point launch_start_time = from_iso_8601("2020-05-09T22:30:58-0500");
+        const std::chrono::system_clock::time_point launch_start_time = from_iso_8601("2020-05-09T22:30:58-0500");
         launch.start(launch_start_time);
 
         CHECK(launch.id() == generated_launch_id);
@@ -165,12 +165,12 @@ TEST_CASE("Test_item end", "[test_item]")
                 _))
             .Return(report_portal::begin_test_item_responce(generated_test_item_id));
 
-        const std::chrono::high_resolution_clock::time_point suite_start_time = from_iso_8601("2020-05-09T22:35:58-0500");
+        const std::chrono::system_clock::time_point suite_start_time = from_iso_8601("2020-05-09T22:35:58-0500");
         suite.start(suite_start_time);
 
         CHECK(suite.id() == generated_test_item_id);
 
-        const std::chrono::high_resolution_clock::time_point suite_end_time = from_iso_8601("2020-05-09T23:35:58-0500");
+        const std::chrono::system_clock::time_point suite_end_time = from_iso_8601("2020-05-09T23:35:58-0500");
         const std::string responce_message = "TestItem with ID = '47183823-2574-4bfd-b411-99ed177d3e43' successfully finished.";
         When(Method(service_mock, end_test_item)
             .Using(

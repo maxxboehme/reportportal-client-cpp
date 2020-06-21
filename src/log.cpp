@@ -9,7 +9,7 @@ namespace report_portal
 
 log::log(
     const uuids::uuid& launch_id,
-    const std::chrono::high_resolution_clock::time_point& time,
+    const std::chrono::system_clock::time_point& time,
     log_level level,
     const std::string& message)
   : _launch_id(launch_id),
@@ -23,7 +23,7 @@ log::log(
 log::log(
     const uuids::uuid& launch_id,
     const uuids::uuid& test_item_id,
-    const std::chrono::high_resolution_clock::time_point& time,
+    const std::chrono::system_clock::time_point& time,
     log_level level,
     const std::string& message)
   : _launch_id(launch_id),
@@ -42,7 +42,7 @@ uuids::uuid log::test_item_id() const {
     return _test_item_id;
 }
 
-std::chrono::high_resolution_clock::time_point log::time() const {
+std::chrono::system_clock::time_point log::time() const {
     return _time;
 }
 

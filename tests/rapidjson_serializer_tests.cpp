@@ -4,7 +4,7 @@
 #include <reportportal/rapidjson_serializer.hpp>
 #include <uuid.h>
 
-static std::chrono::high_resolution_clock::time_point from_iso_8601(const std::string& time)
+static std::chrono::system_clock::time_point from_iso_8601(const std::string& time)
 {
     std::stringstream stream(time);
 
@@ -12,7 +12,7 @@ static std::chrono::high_resolution_clock::time_point from_iso_8601(const std::s
     std::time_t t = std::time(nullptr);
     std::tm local_tm = *std::localtime(&t);
     stream >> std::get_time(&local_tm, "%Y-%m-%dT%H:%M:%S");
-    return std::chrono::high_resolution_clock::from_time_t(std::mktime(&local_tm));
+    return std::chrono::system_clock::from_time_t(std::mktime(&local_tm));
 }
 
 TEST_CASE("Rapidjson deserialize ui token responce", "[rapidjson][serializer]")
@@ -56,7 +56,7 @@ TEST_CASE("Rapidjson serializer begin launch with optionals", "[!hide][rapidjson
 {
     report_portal::rapidjson_serializer serializer;
 
-    const std::chrono::high_resolution_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
     uuids::uuid nullId;
     const std::string result = serializer.serialize_begin_launch(
         "Test Launch",
@@ -118,7 +118,7 @@ TEST_CASE("Rapidjson serializer end launch with optionals", "[!hide][rapidjson][
 {
     report_portal::rapidjson_serializer serializer;
 
-    const std::chrono::high_resolution_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
     const std::string result = serializer.serialize_end_launch(
         end_time);
 
@@ -178,7 +178,7 @@ TEST_CASE("Rapidjson serializer begin test item with optionals", "[!hide][rapidj
 {
     report_portal::rapidjson_serializer serializer;
 
-    const std::chrono::high_resolution_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point start_time = from_iso_8601("2020-05-09T22:30:58-0500");
     uuids::uuid launch_id = uuids::uuid::from_string("47183823-2574-4bfd-b411-99ed177d3e43");
 
     const std::string result = serializer.serialize_begin_test_item(
@@ -228,7 +228,7 @@ TEST_CASE("Rapidjson serializer end test item with optionals", "[!hide][rapidjso
 {
     report_portal::rapidjson_serializer serializer;
 
-    const std::chrono::high_resolution_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point end_time = from_iso_8601("2020-05-09T22:30:58-0500");
     const uuids::uuid launch_id = uuids::uuid::from_string("47183823-2574-4bfd-b411-99ed177d3e43");
 
     const std::string result = serializer.serialize_end_test_item(
@@ -270,7 +270,7 @@ TEST_CASE("Rapidjson serializer batch of logs", "[!hide][rapidjson][serializer]"
 
     const uuids::uuid launch_id = uuids::uuid::from_string("47183823-2574-4bfd-b411-99ed177d3e43");
     const uuids::uuid test_item_id = uuids::uuid::from_string("57183823-2574-4bfd-b411-99ed177d3e43");
-    const std::chrono::high_resolution_clock::time_point time = from_iso_8601("2020-05-09T22:30:58-0500");
+    const std::chrono::system_clock::time_point time = from_iso_8601("2020-05-09T22:30:58-0500");
 
     const std::vector<report_portal::log> logs = {
         report_portal::log(launch_id, test_item_id, time, report_portal::log_level::trace, "Trace message"),
