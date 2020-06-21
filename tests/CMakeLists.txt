@@ -30,6 +30,7 @@ target_sources(catch_main
     PRIVATE
         catch_main.cpp)
 target_link_libraries(catch_main PUBLIC Catch2::Catch2)
+target_compile_features(catch_main PUBLIC cxx_std_14)
 
 add_executable(reportportal-client-cpp_tests)
 target_sources(reportportal-client-cpp_tests
