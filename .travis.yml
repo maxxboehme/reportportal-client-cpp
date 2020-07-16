@@ -3,7 +3,7 @@ env:
      - CONAN_USERNAME: "maxxboehme"
      - CONAN_CHANNEL: "testing"
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
-     - CONAN_UPLOAD_ONLY_WHEN_STABLE: 1 # Will only upload when the branch matches CONAN_STABLE_BRANCH_PATTERN
+     - CONAN_UPLOAD: https://api.bintray.com/conan/maxxboehme/conan-packages
 
 cmake_before_script: &cmake_before_script
   - mkdir build
