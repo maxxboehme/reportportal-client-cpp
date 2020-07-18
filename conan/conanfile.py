@@ -1,9 +1,16 @@
 from conans import ConanFile, CMake, tools
+import os
+import re
 
+
+def _is_release_branch(branch):
+    if re.match(r"^release-\d+\.\d+\.\d+$", branch):
+        return True
+    else:
+        return False
 
 class ReportportalclientcppConan(ConanFile):
     name = "reportportal-client-cpp"
-    version = "0.1"
     license = "Apache-2.0"
     author = "Maxx Boehme"
     url = "https://github.com/maxxboehme/reportportal-client-cpp"
@@ -21,6 +28,30 @@ class ReportportalclientcppConan(ConanFile):
     generators = "cmake", "cmake_paths", "cmake_find_package"
     requires = "libcurl/7.69.1", "stduuid/1.0", "rapidjson/1.1.0"
 
+
+    # Get Major.Minor.Patch version from project-meta-info.cmake and determine revision and metadata
+    # from git information.
+    def set_version(self):
+        content = tools.load(os.path.join(self.recipe_folder, "../project-meta-info.cmake"))
+        major_minor_patch = re.search(r"set\(project_version (\d+\.\d+\.\d+)\)", content).group(1)
+
+        git = tools.Git()
+        latest_release_tag = git.run("rev-list --tags --no-walk --max-count=1")
+        if latest_release_tag:
+            latest_release_tag += ".."
+        revision = git.run("rev-list %sHEAD --count" % latest_release_tag)
+        branch = git.get_branch()
+        if git.is_pristine():
+            dirty = ""
+        else:
+            dirty = ".dirty"
+
+        if revision == 0 and _is_release_branch(branch):
+            # If we are on a release branch and there is no revisions from tag then we should create an
+            # official release package.
+            self.version = major_minor_patch
+        else:
+            self.version = "%s-%s+%s%s" % (major_minor_patch, revision, branch, dirty)
 
     def build_requirements(self):
         if self.options.enable_testing:
