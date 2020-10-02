@@ -53,7 +53,7 @@ class ReportportalclientcppConan(ConanFile):
         major_minor_patch = re.search(r"set\(project_version (\d+\.\d+\.\d+)\)", content).group(1)
 
         git = tools.Git()
-        latest_release_tag = git.run("rev-list --tags --no-walk --max-count=1")
+        latest_release_tag = git.run("rev-list --tags --max-count=1")
         if latest_release_tag:
             latest_release_tag += ".."
         revision = git.run("rev-list %sHEAD --count" % latest_release_tag)
