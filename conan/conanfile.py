@@ -58,17 +58,13 @@ class ReportportalclientcppConan(ConanFile):
             latest_release_tag += ".."
         revision = git.run("rev-list %sHEAD --count" % latest_release_tag)
         branch = _get_branch(git)
-        if git.is_pristine():
-            dirty = ""
-        else:
-            dirty = ".dirty"
 
         if revision == 0 and _is_release_branch(branch):
             # If we are on a release branch and there is no revisions from tag then we should create an
             # official release package.
             self.version = major_minor_patch
         else:
-            self.version = "%s-%s+%s%s" % (major_minor_patch, revision, branch, dirty)
+            self.version = "%s-%s+%s" % (major_minor_patch, revision, branch)
 
     def build_requirements(self):
         if self.options.enable_testing:
