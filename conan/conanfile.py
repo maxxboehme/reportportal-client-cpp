@@ -3,6 +3,23 @@ import os
 import re
 
 
+def _is_travis():
+    return os.getenv("TRAVIS", False)
+
+
+def _is_appveyor():
+    return os.getenv("APPVEYOR", False)
+
+
+def _get_branch(git):
+    if _is_travis():
+        return os.getenv("TRAVIS_BRANCH", None)
+    elif _is_appveyor():
+        return os.getenv("APPVEYOR_REPO_BRANCH", None)
+    else:
+        return git.get_branch()
+
+
 def _is_release_branch(branch):
     if re.match(r"^release-\d+\.\d+\.\d+$", branch):
         return True
@@ -40,7 +57,7 @@ class ReportportalclientcppConan(ConanFile):
         if latest_release_tag:
             latest_release_tag += ".."
         revision = git.run("rev-list %sHEAD --count" % latest_release_tag)
-        branch = git.get_branch()
+        branch = _get_branch(git)
         if git.is_pristine():
             dirty = ""
         else:
