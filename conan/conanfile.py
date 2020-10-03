@@ -11,6 +11,11 @@ def _is_appveyor():
     return os.getenv("APPVEYOR", False)
 
 
+def _is_conan_reference_defined():
+    conan_reference = os.getenv("CONAN_REFERENCE", "")
+    return conan_reference == ""
+
+
 def _get_branch(git):
     if _is_travis():
         return os.getenv("TRAVIS_BRANCH", None)
@@ -21,7 +26,7 @@ def _get_branch(git):
 
 
 def _is_release_branch(branch):
-    if re.match(r"^release-\d+\.\d+\.\d+$", branch):
+    if re.match(r"^release/\d+\.\d+\.\d+$", branch):
         return True
     else:
         return False
@@ -45,27 +50,36 @@ class ReportportalclientcppConan(ConanFile):
     generators = "cmake", "cmake_paths", "cmake_find_package"
     requires = "libcurl/7.69.1", "stduuid/1.0", "rapidjson/1.1.0"
 
-
     # Get Major.Minor.Patch version from project-meta-info.cmake and determine revision and metadata
     # from git information.
     def set_version(self):
-        content = tools.load(os.path.join(self.recipe_folder, "../project-meta-info.cmake"))
-        major_minor_patch = re.search(r"set\(project_version (\d+\.\d+\.\d+)\)", content).group(1)
-
-        git = tools.Git()
-        # latest_release_tag = self.run("git rev-list --tags --max-count=1")
-        # if latest_release_tag == 0:
-        #     latest_release_tag += ".."
-        # revision = self.run("git rev-list %sHEAD --count" % latest_release_tag)
-        branch = _get_branch(git)
-
-        if revision == 0 and _is_release_branch(branch):
-            # If we are on a release branch and there is no revisions from tag then we should create an
-            # official release package.
-            self.version = major_minor_patch
+        # This is helpful in case someone defines the CONAN_REFERENCE environment variable.
+        # The main situation this is for is when using docker containers to package and publish
+        # as we run into issues determining revision and branch using git.
+        if _is_conan_reference_defined():
+            conan_reference = os.getenv("CONAN_REFERENCE", "")
+            match = re.match("%s/([^@]+)@.+" % self.name, conan_reference)
+            if match:
+                self.version = match.group(1)
+            else:
+                raise ValueError("CONAN_REFERENCE could not be parsed for version")
         else:
-            # self.version = "%s-%s+%s" % (major_minor_patch, revision, branch)
-            self.version = "%s+%s" % (major_minor_patch, branch)
+            content = tools.load(os.path.join(self.recipe_folder, "../project-meta-info.cmake"))
+            major_minor_patch = re.search(r"set\(project_version (\d+\.\d+\.\d+)\)", content).group(1)
+
+            git = tools.Git()
+            latest_release_tag = self.run("git rev-list --tags --no-walk --max-count=1")
+            if latest_release_tag == 0:
+                latest_release_tag += ".."
+            revision = self.run("git rev-list %sHEAD --count" % latest_release_tag)
+            branch = _get_branch(git)
+
+            if revision == 0 and _is_release_branch(branch):
+                # If we are on a release branch and there is no revisions from tag then we should create an
+                # official release package.
+                self.version = major_minor_patch
+            else:
+                self.version = "%s-%s+%s" % (major_minor_patch, revision, branch)
 
     def build_requirements(self):
         if self.options.enable_testing:
