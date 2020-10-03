@@ -69,7 +69,7 @@ class ReportportalclientcppConan(ConanFile):
 
             git = tools.Git()
             latest_release_tag = self.run("git rev-list --tags --no-walk --max-count=1")
-            if latest_release_tag == 0:
+            if latest_release_tag:
                 latest_release_tag += ".."
             revision = self.run("git rev-list %sHEAD --count" % latest_release_tag)
             branch = _get_branch(git)
