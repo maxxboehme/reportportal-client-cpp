@@ -13,7 +13,7 @@ def _is_appveyor():
 
 def _is_conan_reference_defined():
     conan_reference = os.getenv("CONAN_REFERENCE", "")
-    return conan_reference == ""
+    return conan_reference != ""
 
 
 def _get_branch(git):
