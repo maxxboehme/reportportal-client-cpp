@@ -6,7 +6,7 @@ environment:
     CONAN_USERNAME: "maxxboehme"
     CONAN_CHANNEL: "testing"
     CONAN_STABLE_BRANCH_PATTERN: "release/*"
-    CONAN_UPLOAD: https://api.bintray.com/conan/maxxboehme/conan-packages
+    CONAN_UPLOAD: https://maxxboehme.jfrog.io/artifactory/api/conan/conan-packages-conan
 
     matrix:
         # First Visual Studio version to support C++17
