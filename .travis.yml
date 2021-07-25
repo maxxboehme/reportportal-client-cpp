@@ -1,6 +1,7 @@
 env:
    global:
      - CONAN_USERNAME: "maxxboehme"
+     - CONAN_LOGIN_USERNAME: "maxxboehme.jfrog@gmail.com"
      - CONAN_CHANNEL: "testing"
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
      - CONAN_UPLOAD: https://maxxboehme.jfrog.io/artifactory/api/conan/conan-packages-conan

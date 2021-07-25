@@ -4,6 +4,7 @@ environment:
     PYTHON: "C:\\Python37"
 
     CONAN_USERNAME: "maxxboehme"
+    CONAN_LOGIN_USERNAME: "maxxboehme.jfrong@gmail.com"
     CONAN_CHANNEL: "testing"
     CONAN_STABLE_BRANCH_PATTERN: "release/*"
     CONAN_UPLOAD: https://maxxboehme.jfrog.io/artifactory/api/conan/conan-packages-conan
