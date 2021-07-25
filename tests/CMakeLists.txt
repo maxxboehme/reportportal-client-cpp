@@ -22,7 +22,7 @@ else()
 endif()
 
 find_package(Catch2 MODULE REQUIRED)
-find_package(FakeIt MODULE REQUIRED)
+find_package(fakeit MODULE REQUIRED)
 
 # This allows for faster build times when iterating on tests.
 add_library(catch_main STATIC)
@@ -42,7 +42,7 @@ target_sources(reportportal-client-cpp_tests
         utils.h
         utils.cpp)
 
-target_link_libraries(reportportal-client-cpp_tests PRIVATE catch_main Catch2::Catch2 FakeIt::FakeIt reportportal-client-cpp::reportportal-client-cpp)
+target_link_libraries(reportportal-client-cpp_tests PRIVATE catch_main Catch2::Catch2 fakeit::fakeit reportportal-client-cpp::reportportal-client-cpp)
 target_include_directories(reportportal-client-cpp_tests
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 # FakeIt does not support optimizations -O2 or -O3

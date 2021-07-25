@@ -84,8 +84,8 @@ class ReportportalclientcppConan(ConanFile):
     def build_requirements(self):
         if self.options.enable_testing:
             self.build_requires("catch2/2.9.2") # Needed for tests (locked to this version for now because of https://github.com/eranpeer/FakeIt/issues/197)
-            self.build_requires("FakeIt/2.0.5@gasuketsu/testing") # Needed for mocks
-            self.options["FakeIt"].integration = "catch"
+            self.build_requires("fakeit/2.0.9") # Needed for mocks
+            self.options["fakeit"].integration = "catch"
 
         if self.options.enable_benchmarking:
             self.build_requires("benchmark/1.5.0")

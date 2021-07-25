@@ -14,10 +14,6 @@ else() # in user space
     endif()
 
     include(${CMAKE_BINARY_DIR}/conan.cmake)
-    # Add other remotes
-    conan_add_remote(
-        NAME bincrafters
-        URL https://api.bintray.com/conan/bincrafters/public-conan)
 
     to_python_bool(${ENABLE_TESTING} ENABLE_TESTING_PYTHON)
     to_python_bool(${ENABLE_BENCHMARKING} ENABLE_BENCHMARKING_PYTHON)
