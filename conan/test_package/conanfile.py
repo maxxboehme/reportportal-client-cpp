@@ -6,8 +6,7 @@ from conans import ConanFile, CMake, tools
 class ReportportalclientcppTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake", "cmake_paths", "cmake_find_package"
-    requires = "catch2/2.9.2", "FakeIt/2.0.5@gasuketsu/testing"
-    source_folder = "../../tests"
+    requires = "catch2/2.9.2", "fakeit/2.0.9"
 
     def build(self):
         cmake = CMake(self)
