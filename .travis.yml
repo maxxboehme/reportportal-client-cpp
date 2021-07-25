@@ -4,7 +4,7 @@ env:
      - CONAN_LOGIN_USERNAME: "maxxboehme.jfrog@gmail.com"
      - CONAN_CHANNEL: "testing"
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
-     - CONAN_UPLOAD: https://maxxboehme.jfrog.io/artifactory/api/conan/conan-packages-conan
+     - CONAN_UPLOAD: https://maxxboehme.jfrog.io/artifactory/api/conan/packages-conan-local
 
 cmake_before_script: &cmake_before_script
   - mkdir build
