@@ -25,9 +25,9 @@ conan_script: &conan_script
 
 linux_cmake: &linux_cmake
    os: linux
-   dist: xenial
+   dist: bionic
    language: python
-   python: "3.7"
+   python: "3.8.10"
    addons:
        apt:
            sources:
@@ -45,9 +45,9 @@ linux_cmake: &linux_cmake
 
 linux_conan: &linux_conan
    os: linux
-   dist: xenial
+   dist: bionic
    language: python
-   python: "3.7"
+   python: "3.8.10"
    services:
      - docker
    install: *conan_install
