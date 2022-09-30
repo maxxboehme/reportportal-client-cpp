@@ -1,0 +1,1 @@
+# WIX Specific Package Variables

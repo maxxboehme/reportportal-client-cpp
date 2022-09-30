@@ -62,8 +62,9 @@ configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/Config.cmake.in" "${project_config}"
     INSTALL_DESTINATION ${config_files_location})
 
-set(runtime_component "${PROJECT_NAME}_Runtime")
-set(development_component "${PROJECT_NAME}_Development")
+string(REPLACE "-" "_" INSTALLER_PROJECT_NAME "${PROJECT_NAME}")
+set(runtime_component "${INSTALLER_PROJECT_NAME}_rt")
+set(development_component "${INSTALLER_PROJECT_NAME}_dev")
 install(
     TARGETS reportportal-client-cpp
     EXPORT ${targets_export_name}
@@ -79,10 +80,12 @@ install(
 install(
     EXPORT ${targets_export_name}
     NAMESPACE ${namespace}
-    DESTINATION ${config_files_location})
+    DESTINATION ${config_files_location}
+    COMPONENT ${development_component})
 install(
     FILES ${project_config} ${version_config}
-    DESTINATION ${config_files_location})
+    DESTINATION ${config_files_location}
+    COMPONENT ${development_component})
 
 # Packaging Support
 include(cmake/Packaging.cmake)
