@@ -3,8 +3,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/ntfnonb50wjqnsuv/branch/master?svg=true)](https://ci.appveyor.com/project/maxxboehme/reportportal-client-cpp/branch/master)
 
 ## Already implemented listeners
+[reportportal-agent-googletest](https://github.com/maxxboehme/reportportal-agent-googletest)
 
 ## Installation
+
 
 ## How to use it
 The following links will direct you to helpful document on how to use reportportal-client-cpp.
