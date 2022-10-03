@@ -42,8 +42,6 @@ workflows:
   build_and_test:
     jobs:
       - gcc-7
-      - gcc-8
-      - gcc-9
       - clang-9
 
 
