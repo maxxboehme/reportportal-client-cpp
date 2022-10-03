@@ -1,4 +1,5 @@
 # reportportal-client-cpp
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/maxxboehme/reportportal-client-cpp/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/maxxboehme/reportportal-client-cpp/tree/master)
 [![Build status](https://ci.appveyor.com/api/projects/status/ntfnonb50wjqnsuv/branch/master?svg=true)](https://ci.appveyor.com/project/maxxboehme/reportportal-client-cpp/branch/master)
 
 ## Already implemented listeners

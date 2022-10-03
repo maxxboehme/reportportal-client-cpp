@@ -30,21 +30,6 @@ jobs:
         - CONAN_GCC_VERSIONS: "7"
       <<: *conan-steps
 
-  gcc-8:
-      docker:
-        - image: conanio/gcc8
-      environment:
-        - CONAN_GCC_VERSIONS: "8"
-      <<: *conan-steps
-
-  gcc-9:
-      docker:
-        - image: conanio/gcc9
-      environment:
-        - CONAN_GCC_VERSIONS: "9"
-      <<: *conan-steps
-
-
   clang-9:
       docker:
         - image: conanio/clang9
