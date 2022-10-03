@@ -8,6 +8,7 @@ environment:
     CONAN_CHANNEL: "testing"
     CONAN_STABLE_BRANCH_PATTERN: "release/*"
     CONAN_UPLOAD: https://mboehme.jfrog.io/artifactory/api/conan/mboehme-conan
+    CONAN_REVISIONS_ENABLED: 1
 
     matrix:
         # First Visual Studio version to support C++17

@@ -1,5 +1,4 @@
 # reportportal-client-cpp
-[![Build Status](https://travis-ci.com/maxxboehme/reportportal-client-cpp.svg?branch=master)](https://travis-ci.com/maxxboehme/reportportal-client-cpp)
 [![Build status](https://ci.appveyor.com/api/projects/status/ntfnonb50wjqnsuv/branch/master?svg=true)](https://ci.appveyor.com/project/maxxboehme/reportportal-client-cpp/branch/master)
 
 ## Already implemented listeners
