@@ -4,4 +4,4 @@
 set -e
 set -x
 
-python ../conan/build.py
+python conan/build.py
